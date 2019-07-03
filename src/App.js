@@ -1,17 +1,17 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import text from './text';
 
 
 class App extends React.Component {
   handleWordSelect(e, i) {
     e.stopPropagation();
-    if(! e.target.className.includes('selected')) {
+    if (!e.target.className.includes('selected')) {
       this.removePopover();
       this.highlightSelected(e.target);
       this.addPopover(e.target, i);
-      this.getWordDefinition(i); 
-    }  
+      this.getWordDefinition(i);
+    }
   }
   getWordDefinition(i) {
     const word = text[i].replace(/[\W_]+/g, "").toLowerCase(),
@@ -34,16 +34,16 @@ class App extends React.Component {
   }
   highlightSelected(target) {
     console.log(target);
-      target.className = target.className + ' selected';
+    target.className = target.className + ' selected';
   }
   removePopover() {
     const popover = document.getElementById('popover'),
-          wrapper = document.getElementById('textOutput'),
-          highlighted = document.getElementsByClassName('selected');
-    if(popover) {
+      wrapper = document.getElementById('textOutput'),
+      highlighted = document.getElementsByClassName('selected');
+    if (popover) {
       wrapper.removeChild(popover);
     }
-    if(highlighted) {
+    if (highlighted) {
       Array.from(highlighted).map((el) => {
         el.className = el.className.replace(' selected', '');
       })
@@ -53,24 +53,24 @@ class App extends React.Component {
     const popover = document.createElement("div"),
       wrapper = document.getElementById('textOutput'),
       wordPosition = target.getBoundingClientRect(),
-      leftMargin = wordPosition.left+target.offsetWidth;
-      console.log(wordPosition.top, wordPosition.right, wordPosition.bottom, wordPosition.left);
+      leftMargin = wordPosition.left + target.offsetWidth;
+    console.log(wordPosition.top, wordPosition.right, wordPosition.bottom, wordPosition.left);
     popover.id = 'popover';
-    popover.style.top = wordPosition.top+"px";
-    popover.style.left = leftMargin+"px";
+    popover.style.top = wordPosition.top + "px";
+    popover.style.left = leftMargin + "px";
     popover.innerHTML = '<span class="loading">Loading...</span>'
-    wrapper.insertBefore( popover, target);
+    wrapper.insertBefore(popover, target);
   }
   paintResponse(res) {
     let result = '';
     res.map((el) => {
-      if(el.meaning) {
-        for( let prop in el.meaning) {
-          if(Array.isArray(el.meaning[prop])) {
+      if (el.meaning) {
+        for (let prop in el.meaning) {
+          if (Array.isArray(el.meaning[prop])) {
             console.log(el.meaning[prop]);
             result = result + `<h3>${prop}</h3>`;
             el.meaning[prop].map((entry) => {
-              if(entry.definition) {
+              if (entry.definition) {
                 result = result + `<p>&#8226; ${entry.definition}</p>`;
               }
             })
@@ -84,9 +84,9 @@ class App extends React.Component {
   noDefinitionFound(word) {
     const message = `<span class="loading">Oops:( Looks like we can't find a definition for <i>'${word}'</i></span>`;
     const popover = document.getElementById('popover');
-    if(popover){
+    if (popover) {
       popover.innerHTML = message;
-    }    
+    }
   }
   render() {
     const textOutput = text.map((word, i) =>
