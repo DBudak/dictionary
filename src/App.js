@@ -7,9 +7,10 @@ class App extends React.Component {
   componentDidMount() {
     console.log(Text);
   }
-  handleWordSelect(i) {
+  handleWordSelect(target, i) {
     console.log(i, 'was clicked');
     this.getWordDefinition(i);
+    this.highlightSelected(target);
   }
   getWordDefinition(i) {
     const word = text[i].replace(/[\W_]+/g, "").toLowerCase(),
@@ -24,15 +25,23 @@ class App extends React.Component {
       .then((resObj) => {
         console.log('+', resObj);
       })
-      .catch((err)  =>{
+      .catch((err) => {
         console.log('-', err.message);
       });;
+  }
+  highlightSelected(target) {
+    console.log(target);
+    if (target.className.includes('selected')) {
+      target.className = target.className.replace(' selected', '');
+    } else {
+      target.className = target.className + ' selected';
+    }
   }
   render() {
     const textOutput = text.map((word, i) =>
       <span
         key={i}
-        onClick={() => this.handleWordSelect(i)} >
+        onClick={(e) => this.handleWordSelect(e.target, i)} >
         {word + ' '}
       </span>
     );
