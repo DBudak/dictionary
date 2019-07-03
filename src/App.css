@@ -15,7 +15,7 @@ main {
   background: red;
 }
 
-.popover {
+#popover {
   position: absolute;
   background: whitesmoke;
   min-height: 30px;

@@ -4,14 +4,10 @@ import text from './text';
 
 
 class App extends React.Component {
-  componentDidMount() {
-    console.log(Text);
-  }
   handleWordSelect(target, i) {
-    console.log(i, 'was clicked');
-    this.getWordDefinition(i);
     this.highlightSelected(target);
     this.addPopover(target, i);
+    this.getWordDefinition(i);   
   }
   getWordDefinition(i) {
     const word = text[i].replace(/[\W_]+/g, "").toLowerCase(),
@@ -25,6 +21,7 @@ class App extends React.Component {
       })
       .then((resObj) => {
         console.log('+', resObj);
+        this.paintResponse(resObj);
       })
       .catch((err) => {
         console.log('-', err.message);
@@ -44,11 +41,32 @@ class App extends React.Component {
       wordPosition = target.getBoundingClientRect(),
       leftMargin = wordPosition.left+target.offsetWidth;
       console.log(wordPosition.top, wordPosition.right, wordPosition.bottom, wordPosition.left);
-    popover.className = 'popover';
+    popover.id = 'popover';
     popover.style.top = wordPosition.top+"px";
     popover.style.left = leftMargin+"px";
     console.log(wrapper, 'child:', target);
     wrapper.insertBefore( popover, target);
+  }
+  paintResponse(res) {
+    let result = '';
+    res.map((el) => {
+      if(el.meaning) {
+        for( let prop in el.meaning) {
+          if(Array.isArray(el.meaning[prop])) {
+            console.log(el.meaning[prop]);
+            result = result + `<h3>${prop}</h3>`;
+            el.meaning[prop].map((entry) => {
+              if(entry.definition) {
+                result = result + `<p>${entry.definition}</p>`;
+              }
+            })
+          }
+        }
+      }
+    });
+    
+    const popover = document.getElementById('popover');
+    popover.innerHTML = result;
   }
   render() {
     const textOutput = text.map((word, i) =>
