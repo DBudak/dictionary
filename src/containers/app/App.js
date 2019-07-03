@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import text from './text';
+import text from '../../text';
 
 
 class App extends React.Component {
@@ -45,7 +45,7 @@ class App extends React.Component {
       wrapper.removeChild(popover);
     }
     if (highlighted) {
-      Array.from(highlighted).map((el) => {
+      Array.from(highlighted).forEach((el) => {
         el.className = el.className.replace(' selected', '');
       })
     }
@@ -65,16 +65,16 @@ class App extends React.Component {
 
   paintResponse(res) {
     let result = '';
-    res.map((el) => {
+    res.forEach((el) => {
       if (el.meaning) {
         for (let prop in el.meaning) {
           if (Array.isArray(el.meaning[prop])) {
             result = result + `<h3>${prop}</h3>`;
-            el.meaning[prop].map((entry) => {
-              if (entry.definition) {
-                result = result + `<p>&#8226; ${entry.definition}</p>`;
+            for (let i = 0; i< el.meaning[prop].length; i++){
+              if (el.meaning[prop][i].definition) {
+                result = result + `<p>&#8226; ${el.meaning[prop][i].definition}</p>`;
               }
-            })
+            }
           }
         }
       }
