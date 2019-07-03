@@ -4,9 +4,11 @@ import text from './text';
 
 
 class App extends React.Component {
-  handleWordSelect(target, i) {
-    this.highlightSelected(target);
-    this.addPopover(target, i);
+  handleWordSelect(e, i) {
+    e.stopPropagation();
+    this.removePopover()
+    this.highlightSelected(e.target);
+    this.addPopover(e.target, i);
     this.getWordDefinition(i);   
   }
   getWordDefinition(i) {
@@ -29,10 +31,19 @@ class App extends React.Component {
   }
   highlightSelected(target) {
     console.log(target);
-    if (target.className.includes('selected')) {
-      target.className = target.className.replace(' selected', '');
-    } else {
       target.className = target.className + ' selected';
+  }
+  removePopover() {
+    const popover = document.getElementById('popover'),
+          wrapper = document.getElementById('textOutput'),
+          highlighted = document.getElementsByClassName('selected');
+    if(popover) {
+      wrapper.removeChild(popover);
+    }
+    if(highlighted) {
+      Array.from(highlighted).map((el) => {
+        el.className = el.className.replace(' selected', '');
+      })
     }
   }
   addPopover(target, i) {
@@ -64,7 +75,6 @@ class App extends React.Component {
         }
       }
     });
-    
     const popover = document.getElementById('popover');
     popover.innerHTML = result;
   }
@@ -72,13 +82,13 @@ class App extends React.Component {
     const textOutput = text.map((word, i) =>
       <span
         key={i}
-        onClick={(e) => this.handleWordSelect(e.target, i)} >
+        onClick={(e) => this.handleWordSelect(e, i)} >
         {word + ' '}
       </span>
     );
 
     return (
-      <div className="App">
+      <div className="App" onClick={(e) => this.removePopover()}>
         <header className="App-header">
         </header>
         <main>
