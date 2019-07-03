@@ -1,34 +1,66 @@
 .App {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+.App-header {
+  text-align:left;
+  font-size: 16px;
+  padding: 15px 15px;
+  border-bottom: solid 1px black;
+  color: #424242;
 }
 
 main {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: whitesmoke;
+  min-height: 94vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  
+  color: #424242;
 }
 
 .selected {
-  background: red;
+  background: #FFEB3B;
 }
-
+.description {
+  font-weight: 900;
+  font-size: 65px;
+  width: 60%;
+  margin: 0 auto 20px auto;
+  padding-top: 15%;
+  color: hsla(0, 0%, 87%, 1);
+}
 #popover {
   position: absolute;
   background: whitesmoke;
-  color: black;
   text-align: left;
   min-height: 30px;
   min-width: 30px;
   top: 0;
   left: 0;
   padding: 10px 20px;
+  border: 1px solid #c5c5c5;
+  border-radius: 2px;
 }
 #popover h3 {
   font-size: 14px;
+  margin: 0;
+  text-transform: capitalize;
+  border-bottom: 1px solid #e2e2e2;
 }
 #popover p {
+  font-size: 12px;
+  margin: 5px 0;
+  font-style: italic;
+  line-height: 22px;
+}
+#popover .loading{
+  font-weight: bold;
   font-size:12px;
+}
+div#textOutput {
+  width: 60%;
+  line-height: 38px;
+  margin: 0 auto;
+  font-size: calc(10px + 2vmin);
 }

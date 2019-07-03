@@ -56,7 +56,7 @@ class App extends React.Component {
     popover.id = 'popover';
     popover.style.top = wordPosition.top+"px";
     popover.style.left = leftMargin+"px";
-    console.log(wrapper, 'child:', target);
+    popover.innerHTML = '<span class="loading">Loading...</span>'
     wrapper.insertBefore( popover, target);
   }
   paintResponse(res) {
@@ -69,7 +69,7 @@ class App extends React.Component {
             result = result + `<h3>${prop}</h3>`;
             el.meaning[prop].map((entry) => {
               if(entry.definition) {
-                result = result + `<p>${entry.definition}</p>`;
+                result = result + `<p>&#8226; ${entry.definition}</p>`;
               }
             })
           }
@@ -80,9 +80,11 @@ class App extends React.Component {
     popover.innerHTML = result;
   }
   noDefinitionFound(word) {
-    const message = `<h3>Oops:( Looks like we can't find a definition for <i>'${word}'</i></h3>`;
+    const message = `<span class="loading">Oops:( Looks like we can't find a definition for <i>'${word}'</i></span>`;
     const popover = document.getElementById('popover');
-    popover.innerHTML = message;
+    if(popover){
+      popover.innerHTML = message;
+    }    
   }
   render() {
     const textOutput = text.map((word, i) =>
@@ -96,8 +98,12 @@ class App extends React.Component {
     return (
       <div className="App" onClick={(e) => this.removePopover()}>
         <header className="App-header">
+          <b>Dmitry Budak</b> Front end developer code assessment
         </header>
         <main>
+          <div class="description">
+            Click on any word below to get its definition
+          </div>
           <div id="textOutput">
             {textOutput}
           </div>
