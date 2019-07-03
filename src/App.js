@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import text from './text';
 import { appId, appKey } from './keys';
-//import fetch from 'cross-fetch'
+
 
 class App extends React.Component {
   componentDidMount() {
