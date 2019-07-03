@@ -18,8 +18,17 @@ main {
 #popover {
   position: absolute;
   background: whitesmoke;
+  color: black;
+  text-align: left;
   min-height: 30px;
   min-width: 30px;
   top: 0;
   left: 0;
+  padding: 10px 20px;
+}
+#popover h3 {
+  font-size: 14px;
+}
+#popover p {
+  font-size:12px;
 }

@@ -27,6 +27,7 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log('-', err.message);
+        this.noDefinitionFound(word);
       });;
   }
   highlightSelected(target) {
@@ -77,6 +78,11 @@ class App extends React.Component {
     });
     const popover = document.getElementById('popover');
     popover.innerHTML = result;
+  }
+  noDefinitionFound(word) {
+    const message = `<h3>Oops:( Looks like we can't find a definition for <i>'${word}'</i></h3>`;
+    const popover = document.getElementById('popover');
+    popover.innerHTML = message;
   }
   render() {
     const textOutput = text.map((word, i) =>
