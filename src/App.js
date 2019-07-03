@@ -6,10 +6,12 @@ import text from './text';
 class App extends React.Component {
   handleWordSelect(e, i) {
     e.stopPropagation();
-    this.removePopover()
-    this.highlightSelected(e.target);
-    this.addPopover(e.target, i);
-    this.getWordDefinition(i);   
+    if(! e.target.className.includes('selected')) {
+      this.removePopover();
+      this.highlightSelected(e.target);
+      this.addPopover(e.target, i);
+      this.getWordDefinition(i); 
+    }  
   }
   getWordDefinition(i) {
     const word = text[i].replace(/[\W_]+/g, "").toLowerCase(),
