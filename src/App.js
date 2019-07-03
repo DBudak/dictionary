@@ -11,6 +11,7 @@ class App extends React.Component {
     console.log(i, 'was clicked');
     this.getWordDefinition(i);
     this.highlightSelected(target);
+    this.addPopover(target, i);
   }
   getWordDefinition(i) {
     const word = text[i].replace(/[\W_]+/g, "").toLowerCase(),
@@ -37,6 +38,18 @@ class App extends React.Component {
       target.className = target.className + ' selected';
     }
   }
+  addPopover(target, i) {
+    const popover = document.createElement("div"),
+      wrapper = document.getElementById('textOutput'),
+      wordPosition = target.getBoundingClientRect(),
+      leftMargin = wordPosition.left+target.offsetWidth;
+      console.log(wordPosition.top, wordPosition.right, wordPosition.bottom, wordPosition.left);
+    popover.className = 'popover';
+    popover.style.top = wordPosition.top+"px";
+    popover.style.left = leftMargin+"px";
+    console.log(wrapper, 'child:', target);
+    wrapper.insertBefore( popover, target);
+  }
   render() {
     const textOutput = text.map((word, i) =>
       <span
@@ -49,10 +62,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <p>
-            {textOutput}
-          </p>
         </header>
+        <main>
+          <div id="textOutput">
+            {textOutput}
+          </div>
+        </main>
       </div>
     );
   }
