@@ -7,11 +7,15 @@ class App extends React.Component {
   componentDidMount() {
     console.log(Text);
   }
+  handleWordSelect(i) {
+    console.log(i, 'was clicked');
+  }
   render() {
     const textOutput = text.map((word, i) => 
       <span 
-      key={i}>
-        {word+' '} 
+      key={i}
+      onClick={() => this.handleWordSelect(i)} >
+        {word+' '}
       </span> 
     );
 
