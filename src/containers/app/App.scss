@@ -6,10 +6,12 @@ $header-background-color: white;
 body {
   background-color: $body-background-color;
 }
+
 .App {
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
+
 .App-header {
   text-align:left;
   font-size: 16px;
@@ -18,6 +20,7 @@ body {
   background: $header-background-color;
   color: $text-color;
 }
+
 main {
   background-color: $body-background-color;
   min-height: 94vh;
@@ -25,12 +28,15 @@ main {
   justify-content: center;
   color: $text-color;
 }
+
 .selected {
   background: $highlight-color;
 }
+
 .description, div#textOutput{
   cursor: default;
 }
+
 .description {
   font-weight: 900;
   font-size: calc(20px + 4vmin);
@@ -39,12 +45,14 @@ main {
   padding-top: 5%;
   color: hsla(0, 0%, 87%, 1);
 }
+
 div#textOutput {
   width: 60%;
   line-height: 38px;
   margin: 0 auto;
   font-size: calc(10px + 2vmin);
 }
+
 #popover {
   position: absolute;
   background: whitesmoke;
@@ -60,20 +68,21 @@ div#textOutput {
   max-width: 600px;
   max-height: 500px;
   overflow: auto;
-}
-#popover {
+
   & h3 {
     font-size: 14px;
     margin: 0;
     text-transform: capitalize;
     border-bottom: 1px solid #e2e2e2;
   }
+
   & p {
     font-size: 12px;
     margin: 5px 0;
     font-style: italic;
     line-height: 22px;
   }
+
   & .loading{
     font-weight: bold;
     font-size:12px;

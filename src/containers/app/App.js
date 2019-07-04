@@ -2,7 +2,6 @@ import React from 'react';
 import './App.scss';
 import text from '../../text';
 
-
 class App extends React.Component {
 
   handleWordSelect(e, i) {
@@ -70,7 +69,7 @@ class App extends React.Component {
         for (let prop in el.meaning) {
           if (Array.isArray(el.meaning[prop])) {
             result = result + `<h3>${prop}</h3>`;
-            for (let i = 0; i< el.meaning[prop].length; i++){
+            for (let i = 0; i < el.meaning[prop].length; i++) {
               if (el.meaning[prop][i].definition) {
                 result = result + `<p>&#8226; ${el.meaning[prop][i].definition}</p>`;
               }
